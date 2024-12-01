@@ -1,21 +1,40 @@
+import kotlin.math.absoluteValue
+
 fun main() {
     fun part1(input: List<String>): Int {
-        return input.size
+        val lists = input.flatMap { line ->
+            line.split("   ")
+                .map { it.toInt() }
+        }
+        val firstList = lists.filterIndexed { index, _ -> index % 2 == 0 }.sorted()
+        val secondList = lists.filterIndexed { index, _ -> index % 2 != 0 }.sorted()
+
+        return firstList.foldIndexed(0) { index: Int, acc: Int, i: Int -> acc + (i - secondList[index]).absoluteValue }
     }
 
     fun part2(input: List<String>): Int {
-        return input.size
+        val lists = input.flatMap { line ->
+            line.split("   ")
+                .map { it.toInt() }
+        }
+        val firstList = lists.filterIndexed { index, _ -> index % 2 == 0 }.sorted()
+        val secondList = lists.filterIndexed { index, _ -> index % 2 != 0 }.sorted()
+
+        return firstList.foldIndexed(0) { index: Int, acc: Int, i: Int -> acc + (i * secondList.count { it == i }) }
     }
 
-    // Test if implementation meets criteria from the description, like:
-    check(part1(listOf("test_input")) == 1)
-
     // Or read a large test input from the `src/Day01_test.txt` file:
-    val testInput = readInput("Day01_test")
-    check(part1(testInput) == 1)
+    readInput("Day01_test").also { input ->
+        check(part1(input) == 11)
+    }
+
+    readInput("Day01_test").also { input ->
+        check(part2(input) == 31)
+    }
 
     // Read the input from the `src/Day01.txt` file.
-    val input = readInput("Day01")
-    part1(input).println()
-    part2(input).println()
+    readInput("Day01").also { input ->
+        part1(input).println()
+        part2(input).println()
+    }
 }
