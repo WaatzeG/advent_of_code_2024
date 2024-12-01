@@ -28,12 +28,17 @@ fun main() {
 }
 
 fun getLists(input: List<String>): Pair<List<Int>, List<Int>> {
-    val lists = input.flatMap { line ->
+    val firstList = mutableListOf<Int>()
+    val secondList = mutableListOf<Int>()
+    input.forEach { line ->
         line.split("   ")
-            .map { it.toInt() }
+            .forEachIndexed { index, value ->
+                if (index % 2 == 0) {
+                    firstList.add(value.toInt())
+                } else {
+                    secondList.add(value.toInt())
+                }
+            }
     }
-    val firstList = lists.filterIndexed { index, _ -> index % 2 == 0 }.sorted()
-    val secondList = lists.filterIndexed { index, _ -> index % 2 != 0 }.sorted()
-
-    return Pair(firstList, secondList)
+    return Pair(firstList.sorted(), secondList.sorted())
 }
