@@ -1,6 +1,25 @@
 import kotlin.math.absoluteValue
 
 fun main() {
+    /**
+     * Return two lists from the input
+     */
+    fun getLists(input: List<String>): Pair<List<Int>, List<Int>> {
+        val firstList = mutableListOf<Int>()
+        val secondList = mutableListOf<Int>()
+        input.forEach { line ->
+            line.split("   ")
+                .forEachIndexed { index, value ->
+                    if (index % 2 == 0) {
+                        firstList.add(value.toInt())
+                    } else {
+                        secondList.add(value.toInt())
+                    }
+                }
+        }
+        return Pair(firstList.sorted(), secondList.sorted())
+    }
+
     fun part1(input: List<String>): Int {
         val (firstList, secondList) = getLists(input)
         return firstList.foldIndexed(0) { index: Int, acc: Int, i: Int -> acc + (i - secondList[index]).absoluteValue }
@@ -25,20 +44,4 @@ fun main() {
         part1(input).println()
         part2(input).println()
     }
-}
-
-fun getLists(input: List<String>): Pair<List<Int>, List<Int>> {
-    val firstList = mutableListOf<Int>()
-    val secondList = mutableListOf<Int>()
-    input.forEach { line ->
-        line.split("   ")
-            .forEachIndexed { index, value ->
-                if (index % 2 == 0) {
-                    firstList.add(value.toInt())
-                } else {
-                    secondList.add(value.toInt())
-                }
-            }
-    }
-    return Pair(firstList.sorted(), secondList.sorted())
 }
