@@ -1,3 +1,8 @@
+package Day04
+
+import println
+import readInput
+
 private enum class Orientation(private val x: Int, private val y: Int) {
     Horizontal(1, 0), 
     Vertical(0, 1), 

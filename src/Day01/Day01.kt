@@ -1,3 +1,7 @@
+package Day01
+
+import println
+import readInput
 import kotlin.math.absoluteValue
 
 fun main() {

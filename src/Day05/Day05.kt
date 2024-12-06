@@ -1,3 +1,8 @@
+package Day05
+
+import println
+import readInput
+
 fun main() {
 
     fun getRules(input: List<String>): List<Pair<Int, Int>> {
